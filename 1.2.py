@@ -1,22 +1,13 @@
 from itertools import islice
 
-class fib:
-  def __init__(self):
-    self.elem = 0
-    self.numb = 1
- 
-  def __iter__(self):
-    return self
- 
-  def __next__(self): #Метод __next__ возвращает следующий по порядку элемент итератора
-    value = self.numb
-    self.numb += self.elem
-    self.elem = value
-    return value
+def fib(a=0, b=1):
+    yield a
+    while True:
+        yield b #функция вернёт генератор
+        a, b = b, a + b
 
-f = fib()
+start = int(input("От какого числа начать счет " ))
+end = int(input("До какого числа вести счет " ))
 
-start = int(input("От какого числа вести счет \t" ))
-end = int(input("До какого числа \t" ))
-
-print(list(islice(f, start, end)))
+fib_list = list(islice(fib(), start, end))
+print(fib_list)
